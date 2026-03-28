@@ -45,7 +45,7 @@ const Users = () => {
         }
       })
       .catch((error) => {
-        console.error("Users Fetch Error :::", error);
+        console.error("Users Fetch Error", error);
       });
   };
 
