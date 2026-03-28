@@ -9,6 +9,11 @@ const Navbar = () => {
   const navigate = useNavigate();
   const { theme, toggleTheme } = useContext(ThemeContext);
   console.log("Current theme:", theme);
+  const handleLogout = () => {
+    navigate("/login");
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+  };
   return (
     <AppBar position="static">
       <Toolbar>
@@ -29,6 +34,9 @@ const Navbar = () => {
             <Button color="inherit" onClick={() => navigate("/skills")}>
               Skills
             </Button>
+            <Button color="inherit" onClick={() => navigate("/users")}>
+              Users
+            </Button>
           </Box>
           <Box>
             <IconButton
@@ -38,7 +46,7 @@ const Navbar = () => {
             >
               {theme === "light" ? <NightlightIcon /> : <LightModeIcon />}
             </IconButton>
-            <Button color="inherit" onClick={() => navigate("/login")}>
+            <Button color="inherit" onClick={handleLogout}>
               Logout
             </Button>
           </Box>

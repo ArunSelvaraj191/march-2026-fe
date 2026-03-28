@@ -6,6 +6,7 @@ import Login from "../modules/Login";
 import Project from "../modules/Project";
 import Register from "../modules/Register";
 import Skills from "../modules/Skills";
+import Users from "../modules/Users";
 import { ThemeContext } from "./ThemeContext";
 
 const Router = () => {
@@ -25,6 +26,7 @@ const Router = () => {
         <Route path="/skills" element={<Skills />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/users" element={<Users />} />
       </Routes>
     </Box>
   );

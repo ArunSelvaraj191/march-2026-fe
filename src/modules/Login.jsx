@@ -19,8 +19,23 @@ const Login = () => {
     }));
   };
 
-  const handleClick = () => {
+  const handleLogin = async () => {
+    const BASE_URL = import.meta.env.VITE_API_URL;
     console.log("User Details :::", userDetails);
+    await axios
+      .post(`${BASE_URL}/users/login`, userDetails)
+      .then((response) => {
+        console.log("response ::::", response);
+        if (response?.status == 200) {
+          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("user", JSON.stringify(response.data.user[0]));
+          alert(response.data.message);
+          navigate("/");
+        }
+      })
+      .catch((error) => {
+        alert("User Invalid");
+      });
   };
 
   const fetchData = async () => {
@@ -56,7 +71,7 @@ const Login = () => {
       ) : (
         <>
           <Typography variant="h4" component="h1" gutterBottom>
-            Login Page Demo
+            Login Page
           </Typography>
           <TextField
             label="Email"
@@ -83,7 +98,7 @@ const Login = () => {
             variant="contained"
             color="primary"
             fullWidth
-            onClick={handleClick}
+            onClick={handleLogin}
           >
             Login
           </Button>

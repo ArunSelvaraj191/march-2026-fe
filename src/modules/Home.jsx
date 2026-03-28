@@ -4,6 +4,7 @@ import { ThemeContext } from "../components/ThemeContext";
 
 const Home = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
+  const user = JSON.parse(localStorage.getItem("user"));
   return (
     <Container sx={{ textAlign: "center", padding: 4 }}>
       <Box
@@ -23,7 +24,7 @@ const Home = () => {
         gutterBottom
         color={theme === "light" ? "textPrimary" : "textSecondary"}
       >
-        Welcome to My Portfolio
+        {user?.username ? `I'm ${user?.username}` : "Welcome"}
       </Typography>
       <Typography
         variant="body1"

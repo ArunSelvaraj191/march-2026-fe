@@ -1,4 +1,5 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -19,8 +20,24 @@ const Register = () => {
     }));
   };
 
-  const handleClick = () => {
+  const handleClick = async () => {
+    const BASE_URL = import.meta.env.VITE_API_URL;
     console.log("User Details :::", userDetails);
+    console.log("Base URL :::", BASE_URL);
+    await axios
+      .post(`${BASE_URL}/users`, userDetails)
+      .then((response) => {
+        console.log("Registration Response :::", response);
+        if (response.status === 201) {
+          alert(response.data.message);
+          navigate("/login");
+        } else {
+          alert("Registration Failed! Please try again.");
+        }
+      })
+      .catch((error) => {
+        console.error("Registration Error :::", error);
+      });
   };
 
   useEffect(() => {
